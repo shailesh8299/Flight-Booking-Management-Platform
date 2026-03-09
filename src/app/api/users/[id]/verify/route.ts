@@ -1,0 +1,20 @@
+import { NextResponse } from 'next/server';
+import { db } from '@/lib/db';
+
+export async function POST(
+    request: Request,
+    { params }: { params: { id: string } }
+) {
+    try {
+        const id = params.id;
+        const updatedUser = await db.updateUser(id, { isVerified: true });
+
+        if (!updatedUser) {
+            return NextResponse.json({ error: 'User not found' }, { status: 404 });
+        }
+
+        return NextResponse.json(updatedUser);
+    } catch (error) {
+        return NextResponse.json({ error: 'Verification failed' }, { status: 400 });
+    }
+}

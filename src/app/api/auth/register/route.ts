@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { db, User } from '@/lib/db';
+import { db, User, cleanDoc } from '@/lib/db';
 
 export async function POST(request: Request) {
     try {
@@ -29,10 +29,11 @@ export async function POST(request: Request) {
         await db.addUser(newUser);
 
         return NextResponse.json({
-            user: newUser,
+            user: cleanDoc(newUser),
             token: `mock-jwt-token-${newUser.id}`
         }, { status: 201 });
-    } catch (error) {
-        return NextResponse.json({ error: 'Registration failed' }, { status: 400 });
+    } catch (error: any) {
+        console.error('Registration error:', error);
+        return NextResponse.json({ error: 'Registration failed', details: error.message }, { status: 400 });
     }
 }

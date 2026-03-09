@@ -87,8 +87,13 @@ export interface Discount {
 }
 
 const getCollection = async (name: string) => {
-    const client = await clientPromise;
-    return client.db("Skybooking").collection(name);
+    try {
+        const client = await clientPromise;
+        return client.db("Skybooking").collection(name);
+    } catch (e: any) {
+        console.error(`Error getting collection ${name}:`, e.message);
+        throw e;
+    }
 };
 
 // Seeding logic
@@ -190,10 +195,10 @@ async function seedDatabase() {
 seedDatabase().catch(console.error);
 
 // Helper to clean MongoDB documents for serialization
-const cleanDoc = (doc: any) => {
+export const cleanDoc = (doc: any) => {
     if (!doc) return doc;
     const { _id, ...rest } = doc;
-    return { ...rest, mongo_id: _id.toString() };
+    return { ...rest, mongo_id: _id?.toString() };
 };
 
 export const db = {

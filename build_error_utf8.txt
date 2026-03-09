@@ -1,0 +1,85 @@
+﻿
+> skybook-nextjs@1.0.0 build
+> next build
+
+node.exe : ΓÜá Warning: Next.js inferred your 
+workspace root, but it may not be correct.
+At C:\Program Files\nodejs\npm.ps1:29 char:3
++   & $NODE_EXE $NPM_CLI_JS $args
++   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (ΓÜá 
+    Warning: Ne...not be correct.:String) [], R  
+  emoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+ We detected multiple lockfiles and selected the 
+directory of C:\Users\mishr\package-lock.json as 
+the root directory.
+ To silence this warning, set `turbopack.root` 
+in your Next.js config, or consider removing one 
+of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/
+config/next-config-js/turbopack#root-directory 
+for more information.
+ Detected additional lockfiles: 
+   * C:\Users\mishr\Downloads\flight-booking-mana
+gement-0386144d\package-lock.json
+
+Γû▓ Next.js 16.1.6 (Turbopack)
+- Environments: .env
+
+  Creating an optimized production build ...
+Browserslist: browsers data (caniuse-lite) is 9 
+months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: 
+https://github.com/browserslist/update-db#readme
+Γ£ô Compiled successfully in 6.6s
+  Running TypeScript ...
+Failed to compile.
+
+.next/dev/types/validator.ts:207:31
+Type error: Type 'typeof import("C:/Users/mishr/D
+ownloads/flight-booking-management-0386144d/src/a
+pp/api/bookings/[id]/passengers/route")' does 
+not satisfy the constraint 'RouteHandlerConfig<"/
+api/bookings/[id]/passengers">'.
+  Types of property 'GET' are incompatible.
+    Type '(request: Request, { params }: { 
+params: { id: string; }; }) => 
+Promise<NextResponse<Passenger[]>>' is not 
+assignable to type '(request: NextRequest, 
+context: { params: Promise<{ id: string; }>; }) 
+=> void | Response | Promise<void | Response>'.
+      Types of parameters '__1' and 'context' 
+are incompatible.
+        Type '{ params: Promise<{ id: string; 
+}>; }' is not assignable to type '{ params: { 
+id: string; }; }'.
+          Types of property 'params' are 
+incompatible.
+            Property 'id' is missing in type 
+'Promise<{ id: string; }>' but required in type 
+'{ id: string; }'.
+
+[0m [90m 205 |[39m   type 
+__IsExpected[33m<[39m[33mSpecific[39m 
+[36mextends[39m [33mRouteHandlerConfig[39m[3
+3m<[39m[32m"/api/bookings/[id]/passengers"[39m
+[33m>>[39m [33m=[39m [33mSpecific[39m
+ [90m 206 |[39m   [36mconst[39m handler 
+[33m=[39m {} [36mas[39m [36mtypeof[39m [36
+mimport[39m([32m"../../../src/app/api/bookings/
+[id]/passengers/route.js"[39m)
+[31m[1m>[22m[39m[90m 207 |[39m   type 
+__Check [33m=[39m 
+__IsExpected[33m<[39m[36mtypeof[39m 
+handler[33m>[39m
+ [90m     |[39m                               
+[31m[1m^[22m[39m
+ [90m 208 |[39m   [90m// @ts-ignore[39m
+ [90m 209 |[39m   type __Unused [33m=[39m 
+__Check
+ [90m 210 |[39m }[0m
+Next.js build worker exited with code: 1 and 
+signal: null

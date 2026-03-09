@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Plane, CreditCard, Lock, Clock, Shield, RefreshCw, Calendar, AlertCircle, Repeat, MapPin } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Plane, CreditCard, Lock, Clock, Shield, RefreshCw, Calendar, AlertCircle, Repeat, MapPin } from 'lucide-react';
 import Header from '@/components/Header';
 import PassengerForm from '@/components/PassengerForm';
 import { Button } from '@/components/ui/button';
@@ -53,7 +53,7 @@ const BookingPage = () => {
     }
 
     // Initialize passenger forms
-    if (passengers.length !== searchParams.passengers) {
+    if (searchParams && passengers.length !== searchParams.passengers) {
       const initialPassengers: Passenger[] = Array.from({ length: searchParams.passengers }, () => ({
         name: '',
         age: 0,
@@ -300,13 +300,13 @@ const BookingPage = () => {
                       <div className="p-4 bg-secondary/50 rounded-xl">
                         <p className="text-xs font-bold text-primary mb-2 uppercase">Outbound Flight</p>
                         <p className="font-bold">{selectedFlight?.airline} {selectedFlight?.flight_number}</p>
-                        <p className="text-xs text-muted-foreground">{searchParams.from} → {searchParams.to}</p>
+                        <p className="text-xs text-muted-foreground">{searchParams?.from} → {searchParams?.to}</p>
                       </div>
                       {isRoundTrip && selectedReturnFlight && (
                         <div className="p-4 bg-primary/5 border border-primary/20 rounded-xl">
                           <p className="text-xs font-bold text-primary mb-2 uppercase">Return Flight</p>
                           <p className="font-bold">{selectedReturnFlight.airline} {selectedReturnFlight.flight_number}</p>
-                          <p className="text-xs text-muted-foreground">{searchParams.to} → {searchParams.from}</p>
+                          <p className="text-xs text-muted-foreground">{searchParams?.to} → {searchParams?.from}</p>
                         </div>
                       )}
                     </>
@@ -320,7 +320,7 @@ const BookingPage = () => {
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">Passengers</span>
-                    <span className="font-medium">{searchParams.passengers}</span>
+                    <span className="font-medium">{searchParams?.passengers}</span>
                   </div>
                 </div>
 

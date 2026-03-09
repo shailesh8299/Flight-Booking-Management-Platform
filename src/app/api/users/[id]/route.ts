@@ -1,12 +1,13 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 
 export async function GET(
-    request: Request,
-    { params }: { params: { id: string } }
+    request: NextRequest,
+    { params }: { params: Promise<{ id: string }> }
 ) {
+    const { id } = await params;
     const users = await db.getUsers();
-    const user = users.find(u => u.id === params.id);
+    const user = users.find(u => u.id === id);
 
     if (!user) {
         return NextResponse.json({ error: 'User not found' }, { status: 404 });
@@ -16,12 +17,13 @@ export async function GET(
 }
 
 export async function PUT(
-    request: Request,
-    { params }: { params: { id: string } }
+    request: NextRequest,
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
+        const { id } = await params;
         const updates = await request.json();
-        const updatedUser = await db.updateUser(params.id, updates);
+        const updatedUser = await db.updateUser(id, updates);
 
         if (!updatedUser) {
             return NextResponse.json({ error: 'User not found' }, { status: 404 });

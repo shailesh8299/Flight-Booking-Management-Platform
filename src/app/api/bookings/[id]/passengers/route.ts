@@ -3,9 +3,9 @@ import { db } from '@/lib/db';
 
 export async function GET(
     request: Request,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
-    const bookingId = params.id;
+    const { id: bookingId } = await params;
     const allPassengers = await db.getPassengers();
     const passengers = allPassengers.filter(p => p.booking_id === bookingId);
     return NextResponse.json(passengers);
